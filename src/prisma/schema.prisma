@@ -1,0 +1,41 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Catalog {
+  id        String      @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name     String   @db.VarChar(255)
+}
+
+model Item {
+  id     String     @id @default(uuid())
+  name    String  @db.VarChar(255)
+  catalog   Catalog    @relation(fields: [catalogId], references: [id],onUpdate: Cascade)
+  catalogId Int   @unique
+  category  Category  @relation(fields: [categoryId], references: [id],onUpdate: Cascade)
+  categoryId Int   @unique
+  quantity Int
+  price   Float4
+   @@index([price,categoryId,name])
+
+}
+
+model Category {
+  id      String      @id @default(uuid())
+  name    string   @db.VarChar(255)
+
+}
+model User {
+  id      String      @id @default(uuid())
+  email   String   @unique
+  password String  @db.VarChar(255)
+  role   Role  @relation(fields: [roleId], references: [id],onUpdate: Cascade)
+  roleId Int   @unique
+}
+model Role {
+  id      String      @id @default(uuid())
+  name    String   @db.VarChar(255)
+
+}
