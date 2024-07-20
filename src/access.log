@@ -263,3 +263,8 @@
 ::1 - - [20/Jul/2024:15:43:41 +0000] "GET /api/items/find HTTP/1.1" 403 36 "-" "PostmanRuntime/7.40.0"
 ::1 - - [20/Jul/2024:15:44:00 +0000] "GET /api/items/find HTTP/1.1" 403 36 "-" "PostmanRuntime/7.40.0"
 ::1 - - [20/Jul/2024:15:44:24 +0000] "GET /api/items/find HTTP/1.1" 200 549 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:15:45:15 +0000] "GET /api/items/findone/3ff8c965-fb04-4d94-b765-4b17cd8cbaa4 HTTP/1.1" 201 244 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:15:45:29 +0000] "POST /api/user/login HTTP/1.1" 200 278 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:15:45:49 +0000] "POST /api/user/verifyOTP HTTP/1.1" 200 288 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:15:46:02 +0000] "GET /api/reports/allReports HTTP/1.1" 200 35 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:15:46:17 +0000] "GET /api/items/findone/3ff8c965-fb04-4d94-b765-4b17cd8cbaa4 HTTP/1.1" 201 244 "-" "PostmanRuntime/7.40.0"

@@ -11,8 +11,8 @@ Welcome to the smart vending machine system! This repository contains a Node.js 
 4. [Usage](#usage)
 5. [API Documentation](#api-documentation)
 6. [DB Documentation](#db-documentation)
-7. [Notes](##notes)
-8. [Enhancements] (##enhancements)
+7. [Notes](#notes)
+8. [Enhancements](#enhancements)
 
 ## Introduction
 
