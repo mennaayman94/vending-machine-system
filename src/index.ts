@@ -38,11 +38,11 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use("/api/items", itemRouter);
 app.use("/api/user", userRouter);
-app.use("/api/payment",limiter,purchaseRouter)
-app.use("/api/roles",roleRouter)
-app.use("/api/catelogs",catelogRouter)
-app.use("/api/category",categoryRouter)
-app.use("/api/reports",limiter,reportsRouter)
+app.use("/api/payment", limiter, purchaseRouter);
+app.use("/api/roles", roleRouter);
+app.use("/api/catelogs", catelogRouter);
+app.use("/api/category", categoryRouter);
+app.use("/api/reports", limiter, reportsRouter);
 // HTTPS options (key and cert)
 const options = {
   key: fs.readFileSync("server.key"),

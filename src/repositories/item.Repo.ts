@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-
 // add new item
 export const createItem = async ({
   name,
@@ -10,8 +9,8 @@ export const createItem = async ({
   categoryId,
   quantity,
   price,
-}: Omit<Item,"id">) => {
-  console.log("------repository:createItem---------")
+}: Omit<Item, "id">) => {
+  console.log("------repository:createItem---------");
 
   try {
     const newItem = await prisma.item.create({
@@ -32,7 +31,7 @@ export const createItem = async ({
 
 // find by id
 export const findItem = async (itemID: string) => {
-  console.log("------repository:findItem---------")
+  console.log("------repository:findItem---------");
 
   try {
     return await prisma.item.findUnique({
@@ -53,7 +52,7 @@ export const findItems = async ({
   catalogId,
   categoryId,
 }: FindItemsParams) => {
-  console.log("------repository:findItems---------")
+  console.log("------repository:findItems---------");
 
   try {
     const skip = (page - 1) * pageSize;
@@ -113,7 +112,7 @@ export const updateItem = async ({
   quantity,
   price,
 }: Item) => {
-  console.log("------repository:updateItem---------")
+  console.log("------repository:updateItem---------");
 
   try {
     const updatedItem = await prisma.item.update({
@@ -135,7 +134,7 @@ export const updateItem = async ({
 
 // delete an item
 export const deleteItem = async (itemId: string) => {
-  console.log("------repository:deleteItem---------")
+  console.log("------repository:deleteItem---------");
 
   try {
     const deletedItem = await prisma.item.delete({

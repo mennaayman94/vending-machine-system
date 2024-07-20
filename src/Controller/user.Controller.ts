@@ -8,7 +8,7 @@ import redisClient from "../redis/clients";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const createUserController = async (req: Request, res: Response) => {
-  console.log("------controller:createUserController---------")
+  console.log("------controller:createUserController---------");
 
   try {
     // check if there any validation errors
@@ -35,7 +35,7 @@ export const createUserController = async (req: Request, res: Response) => {
 };
 
 export const userLoginController = async (req: Request, res: Response) => {
-  console.log("------controller:userLoginController---------")
+  console.log("------controller:userLoginController---------");
 
   try {
     // check if there any validation errors
@@ -61,14 +61,14 @@ export const userLoginController = async (req: Request, res: Response) => {
         });
         await redisClient.setEx(user.id, 300, generatedOTP);
         const token = jwt.sign(
-          { id: user.id, roleId:user.roleId },
+          { id: user.id, roleId: user.roleId },
           process.env.JWT_SECRET as string,
           { expiresIn: "5min" }
         );
         return res
           .cookie("jwt", token, {
             httpOnly: true,
-            secure:true
+            secure: true,
           })
           .status(200)
           .json({ otp: generatedOTP, token });
@@ -85,7 +85,7 @@ export const userLoginController = async (req: Request, res: Response) => {
   }
 };
 export const verifyOTP = async (req: Request, res: Response) => {
-  console.log("------controller:verifyOTP---------")
+  console.log("------controller:verifyOTP---------");
 
   try {
     const validationErrors = validationResult(req);
@@ -94,21 +94,24 @@ export const verifyOTP = async (req: Request, res: Response) => {
       return res.status(422).json({ message: validationErrors.array()[0].msg });
     }
     const otp = req.body["otp"] as string;
-    const result:any = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET as string);
+    const result: any = jwt.verify(
+      req.cookies.jwt,
+      process.env.JWT_SECRET as string
+    );
     const storedOtp = await redisClient.get(result.id);
     if (storedOtp && storedOtp === otp) {
       const token = jwt.sign(
-        { id: result.id, roleId:result.roleId },
+        { id: result.id, roleId: result.roleId },
         process.env.JWT_SECRET as string,
         { expiresIn: "1h" }
       );
       return res
-          .cookie("jwt", token, {
-            httpOnly: true,
-            secure:true
-          })
-          .status(200)
-          .json({ message: "userLoggedin",token});
+        .cookie("jwt", token, {
+          httpOnly: true,
+          secure: true,
+        })
+        .status(200)
+        .json({ message: "userLoggedin", token });
     } else {
       return res.status(403).json({ message: "Invalid otp" });
     }
@@ -117,5 +120,4 @@ export const verifyOTP = async (req: Request, res: Response) => {
       .status(400)
       .json({ error: "something went wrong in logging user", message: error });
   }
- 
 };

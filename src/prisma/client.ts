@@ -1,23 +1,18 @@
-import { Prisma, PrismaClient ,  } from '@prisma/client';
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const connect = async () => {
-    try {
+  try {
     await prisma.$connect();
-    console.log("connected")
+    console.log("connected");
   } catch (error) {
-    console.log(error)
-  }  
-}  
+    console.log(error);
+  }
+};
 
 const closeClientConnect = async () => {
-   await prisma.$disconnect();
+  await prisma.$disconnect();
 };
 
-export {
-  prisma,
-  connect,
-  closeClientConnect,
-  PrismaClient
-};
+export { prisma, connect, closeClientConnect, PrismaClient };

@@ -1,18 +1,26 @@
 import { Request, Response } from "express";
-import { CreateItemService , findItemService , findItemsService , updateItemService ,deleteItemService } from "../services/item.Service";
+import {
+  CreateItemService,
+  findItemService,
+  findItemsService,
+  updateItemService,
+  deleteItemService,
+} from "../services/item.Service";
 // validator results
 import { validationResult } from "express-validator";
+import { Role } from "../utils/enums/Roles";
 
 // add new item
-export const createItemController = async (req: Request|any, res: Response) => {
-  console.log("------controller:createItemController---------")
+export const createItemController = async (
+  req: Request | any,
+  res: Response
+) => {
+  console.log("------controller:createItemController---------");
   try {
-    if(req.roleName!=="Admin"){
-      return res
-      .status(403)
-      .json({ message: "You are not authorized" });
+    if (req.roleName !== Role.admin) {
+      return res.status(403).json({ message: "You are not authorized" });
     }
-    
+
     // check if there any validation errors
     const validationErrors = validationResult(req);
 
@@ -39,10 +47,13 @@ export const createItemController = async (req: Request|any, res: Response) => {
 };
 
 // find item by id
-export const findItemController = async (req: Request|any, res: Response) => {
-  console.log("------controller:findItemController---------")
+export const findItemController = async (req: Request | any, res: Response) => {
+  console.log("------controller:findItemController---------");
 
   try {
+    if (req.roleName !== Role.admin&& req.roleName !== Role.buyer) {
+      return res.status(403).json({ message: "You are not authorized" });
+    }
     // check if there any validation errors
     const validationErrors = validationResult(req);
 
@@ -53,8 +64,8 @@ export const findItemController = async (req: Request|any, res: Response) => {
     const { id } = req.params;
 
     let item = await findItemService(id);
-    if(!item){
-      return res.status(404).json({message:"item not found"})
+    if (!item) {
+      return res.status(404).json({ message: "item not found" });
     }
 
     res.status(201).json({ ...item });
@@ -66,10 +77,13 @@ export const findItemController = async (req: Request|any, res: Response) => {
 };
 
 // find items by filters
-export const findItemsController = async (req: Request, res: Response) => {
-  console.log("------controller:findItemsController---------")
+export const findItemsController = async (req: Request|any, res: Response) => {
+  console.log("------controller:findItemsController---------");
 
   try {
+    if (req.roleName !== Role.admin&& req.roleName !== Role.buyer) {
+      return res.status(403).json({ message: "You are not authorized" });
+    }
     // Check if there are any validation errors
     const validationErrors = validationResult(req);
 
@@ -78,10 +92,17 @@ export const findItemsController = async (req: Request, res: Response) => {
     }
 
     // Extract and filter the request parameters dynamically
-    const validParams = ["page", "pageSize", "minPrice", "maxPrice", "catalogId", "categoryId"];
+    const validParams = [
+      "page",
+      "pageSize",
+      "minPrice",
+      "maxPrice",
+      "catalogId",
+      "categoryId",
+    ];
     const filterParams: any = {};
 
-    validParams.forEach(param => {
+    validParams.forEach((param) => {
       if (req.body[param] !== undefined) {
         filterParams[param] = req.body[param];
       }
@@ -92,19 +113,25 @@ export const findItemsController = async (req: Request, res: Response) => {
 
     res.status(200).json(items);
   } catch (error) {
-    res.status(400).json({ error: "Something went wrong in fetching items", message: error });
+    res
+      .status(400)
+      .json({
+        error: "Something went wrong in fetching items",
+        message: error,
+      });
   }
 };
 
 // update item
-export const updateItemController = async (req: Request| any, res: Response) => {
-  console.log("------controller:updateItemController---------")
+export const updateItemController = async (
+  req: Request | any,
+  res: Response
+) => {
+  console.log("------controller:updateItemController---------");
 
   try {
-    if(req.roleName!=="Admin"){
-      return res
-      .status(403)
-      .json({ message: "You are not authorized" });
+    if (req.roleName !== Role.admin) {
+      return res.status(403).json({ message: "You are not authorized" });
     }
     // Check if there are any validation errors
     const validationErrors = validationResult(req);
@@ -114,14 +141,20 @@ export const updateItemController = async (req: Request| any, res: Response) => 
     }
 
     // Extract and filter the request parameters dynamically
-    const validParams = ["name", "catalogId", "categoryId", "quantity", "price"];
+    const validParams = [
+      "name",
+      "catalogId",
+      "categoryId",
+      "quantity",
+      "price",
+    ];
     const updateParams: any = {};
-   
-    // extracting the id
-    const {id} = req.params
-    updateParams.id = id
 
-    validParams.forEach(param => {
+    // extracting the id
+    const { id } = req.params;
+    updateParams.id = id;
+
+    validParams.forEach((param) => {
       if (req.body[param] !== undefined) {
         updateParams[param] = req.body[param];
       }
@@ -139,19 +172,23 @@ export const updateItemController = async (req: Request| any, res: Response) => 
   } catch (error) {
     res
       .status(400)
-      .json({ error: "Something went wrong in updating the item", message: error });
+      .json({
+        error: "Something went wrong in updating the item",
+        message: error,
+      });
   }
 };
 
 // delete item
-export const deleteItemController = async (req: Request|any, res: Response) => {
-  console.log("------controller:deleteItemController---------")
+export const deleteItemController = async (
+  req: Request | any,
+  res: Response
+) => {
+  console.log("------controller:deleteItemController---------");
 
   try {
-    if(req.roleName!=="Admin"){
-      return res
-      .status(403)
-      .json({ message: "You are not authorized" });
+    if (req.roleName !== Role.admin) {
+      return res.status(403).json({ message: "You are not authorized" });
     }
     // Check if there are any validation errors
     const validationErrors = validationResult(req);
@@ -165,10 +202,13 @@ export const deleteItemController = async (req: Request|any, res: Response) => {
     // Call the service function to delete the item
     await deleteItemService(id);
 
-    res.status(200).json({message: "item was deleted Successfully"});
-  } catch (error:any) {
+    res.status(200).json({ message: "item was deleted Successfully" });
+  } catch (error: any) {
     res
       .status(400)
-      .json({ error: "Something went wrong in deleting the item", message: error.message  });
+      .json({
+        error: "Something went wrong in deleting the item",
+        message: error.message,
+      });
   }
 };

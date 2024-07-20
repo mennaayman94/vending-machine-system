@@ -6,7 +6,7 @@ export const CreateUserService = async ({
   password,
   roleId,
 }: Omit<UserInput, "id">) => {
-    console.log("------service:CreateUserService---------")
+  console.log("------service:CreateUserService---------");
 
   try {
     return await createUser({ email, password, roleId });
@@ -17,7 +17,7 @@ export const CreateUserService = async ({
 export const loginUserService = async ({
   email,
 }: Omit<UserInput, "roleId" | "id" | "password">): Promise<UserInput> => {
-    console.log("------service:loginUserService---------")
+  console.log("------service:loginUserService---------");
 
   try {
     return await loginUser({ email });
@@ -26,10 +26,10 @@ export const loginUserService = async ({
   }
 };
 export const findUserById = async (id: string): Promise<UserInput> => {
-    console.log("------service:findUserById---------")
+  console.log("------service:findUserById---------");
 
   try {
-    return await getUserById(id) as UserInput;
+    return (await getUserById(id)) as UserInput;
   } catch (err) {
     throw err;
   }

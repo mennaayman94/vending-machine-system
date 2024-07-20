@@ -7,4 +7,4 @@ npx prisma migrate dev --schema=./src/prisma/schema.prisma
 node ./scripts/init-db.js
 
 # Run the main application
-npm run dev
+npm run start:dev

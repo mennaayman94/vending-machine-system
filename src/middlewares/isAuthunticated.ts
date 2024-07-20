@@ -10,7 +10,7 @@ export const IsAuthunticated = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("------middleware:IsAuthunticated---------")
+  console.log("------middleware:IsAuthunticated---------");
 
   try {
     //not found
@@ -28,16 +28,14 @@ export const IsAuthunticated = async (
       console.log("Token has expired");
       return res.status(403).json({ message: "Token expired" });
     }
-    const user = await findUserById(decoded.id)
-    const role = await findRoleById(decoded.roleId)
+    const user = await findUserById(decoded.id);
+    const role = await findRoleById(decoded.roleId);
 
     if (user && role && user.roleId === decoded.roleId) {
       req.roleName = role.name;
       next();
     } else {
-      res
-        .status(403)
-        .json({ message: "invalid token" });
+      res.status(403).json({ message: "invalid token" });
     }
   } catch (error: any) {
     error.StatusCode = 401;
