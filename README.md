@@ -17,6 +17,7 @@ Welcome to the smart vending machine system! This repository contains a Node.js 
 ## Introduction
 
 This is an application for vending machine system using nodejs, prisma and redis
+This application is structured using Repository pattern
 
 ## Prerequisites
 
