@@ -1,11 +1,11 @@
 import { createPurchase } from "../repositories/purchases.Repo";
 import { Purchase } from "../utils/types/Purchase";
 
-export const CreateItemService = async({ totalSum,items }:Omit<Purchase,"id">) => {
-    console.log("------service:CreateItemService---------")
+export const CreatePurchaseService = async({ totalCost,itemId,quantity,paymentId,categoryId,createdAt }:Purchase) => {
+    console.log("------service:CreatePurchaseService---------")
 
     try {
-    return await createPurchase({ totalSum,items });
+    return await createPurchase({ totalCost,itemId,quantity,paymentId,categoryId, createdAt });
     } catch (err) {
     throw err
     }

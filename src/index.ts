@@ -17,13 +17,13 @@ import purchaseRouter from "./routes/purchase.Router";
 import roleRouter from "./routes/role.Router";
 import catelogRouter from "./routes/catelog.Router";
 import categoryRouter from "./routes/category.Router";
+import reportsRouter from "./routes/salesReports.Router";
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const app = express();
 const port = process.env.PORT || 8000; // HTTPS default port
-// Middleware
-// app.use(rateLimit)
+
 app.use(bodyParser.json());
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
@@ -36,14 +36,13 @@ app.use(cookieParser());
 
 app.use(morgan("combined", { stream: accessLogStream }));
 
-// app.use(logger);
-
 app.use("/api/items", itemRouter);
 app.use("/api/user", userRouter);
-app.use("/api/payment",purchaseRouter)
+app.use("/api/payment",limiter,purchaseRouter)
 app.use("/api/roles",roleRouter)
 app.use("/api/catelogs",catelogRouter)
 app.use("/api/category",categoryRouter)
+app.use("/api/reports",limiter,reportsRouter)
 // HTTPS options (key and cert)
 const options = {
   key: fs.readFileSync("server.key"),

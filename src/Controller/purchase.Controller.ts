@@ -4,6 +4,7 @@ import { validationResult } from "express-validator";
 import {
   checkInventoryAndUpdate,
 } from "../repositories/purchases.Repo";
+import { createPayment } from "../repositories/payment.Repo";
 export const pusrchaseItems = async (
   req: Request | any,
   res: Response,
@@ -28,18 +29,18 @@ export const pusrchaseItems = async (
       itemsHashMap[item.itemId] = item.quantity;
     });
    
-    const { transaction, sum } = await checkInventoryAndUpdate(
+    const { transaction, sum,paymentId } = await checkInventoryAndUpdate(
       items,
       itemsHashMap,
-      totalSum
+      totalSum, cash
     );
-    if (sum > cash) {
-      return res.status(200).json({ messgae: "insufficient amount" });
-    }
+
     if (sum === cash) {
+      await createPayment({totalSum:sum,paymentId})
       return res.status(200).json({ messgae: "your purchase is successed" });
     }
     if (cash > sum) {
+      await createPayment({totalSum:sum,paymentId})
       return res
         .status(200)
         .json({ messgae: "your purchase is successed", change: cash - sum });

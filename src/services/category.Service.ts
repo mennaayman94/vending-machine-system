@@ -1,7 +1,6 @@
-import { Category } from "@prisma/client";
 import { createCategory } from "../repositories/category.Repo";
 
-export const addCategory= async ({name}:{name:string}):Promise<Category>=>{
+export const addCategory= async ({name}:{name:string})=>{
     console.log("------service:addCategory---------")
 
     try {

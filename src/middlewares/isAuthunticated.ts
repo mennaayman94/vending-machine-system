@@ -2,8 +2,6 @@
 
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { getUserById } from "../repositories/user.Repo";
-import { getRoleById } from "../repositories/role.Repo";
 import { findUserById } from "../services/user.Service";
 import { findRoleById } from "../services/role.Service";
 

@@ -71,7 +71,7 @@ export const userLoginController = async (req: Request, res: Response) => {
             secure:true
           })
           .status(200)
-          .json({ otp: generatedOTP });
+          .json({ otp: generatedOTP, token });
       } else {
         return res.status(200).json({ message: "otp already sent" });
       }

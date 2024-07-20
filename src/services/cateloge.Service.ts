@@ -1,7 +1,6 @@
-import { Catalog } from "@prisma/client";
 import { createCatlog } from "../repositories/catelog.Repo";
 
-export const addcatelog= async ({name}:{name:string}):Promise<Catalog>=>{
+export const addcatelog= async ({name}:{name:string})=>{
     console.log("------service:addcatelog---------")
 
     try {

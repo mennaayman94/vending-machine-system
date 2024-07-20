@@ -47,9 +47,18 @@ model User {
   roleId   String
   role     Role   @relation(fields: [roleId], references: [id], onUpdate: Cascade)
 }
-model Purchase {
+model Payment {
   id       String @id @default(uuid())
-  items    String 
+  paymentId    String 
   createdAt DateTime @default(now())
   totalSum Float
+}
+model Purchase {
+  id       String @id @default(uuid())
+  itemId    String 
+  paymentId    String
+  categoryId String
+  createdAt DateTime 
+  quantity Int
+  totalCost Float
 }
