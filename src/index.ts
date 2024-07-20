@@ -14,6 +14,9 @@ import userRouter from "./routes/user.Router";
 import { connectRedis } from "./redis/clients";
 import rateLimit from "express-rate-limit";
 import purchaseRouter from "./routes/purchase.Router";
+import roleRouter from "./routes/role.Router";
+import catelogRouter from "./routes/catelog.Router";
+import categoryRouter from "./routes/category.Router";
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
@@ -38,7 +41,9 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use("/api/items", itemRouter);
 app.use("/api/user", userRouter);
 app.use("/api/payment",purchaseRouter)
-
+app.use("/api/roles",roleRouter)
+app.use("/api/catelogs",catelogRouter)
+app.use("/api/category",categoryRouter)
 // HTTPS options (key and cert)
 const options = {
   key: fs.readFileSync("server.key"),

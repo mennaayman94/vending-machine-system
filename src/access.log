@@ -130,3 +130,7 @@
 ::1 - - [19/Jul/2024:18:38:24 +0000] "POST /api/payment/create HTTP/1.1" 400 58 "-" "PostmanRuntime/7.40.0"
 ::1 - - [19/Jul/2024:18:38:41 +0000] "POST /api/payment/create HTTP/1.1" 200 52 "-" "PostmanRuntime/7.40.0"
 ::1 - - [19/Jul/2024:18:38:47 +0000] "POST /api/payment/create HTTP/1.1" 400 58 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:09:59:52 +0000] "POST /api/roles/create HTTP/1.1" 422 26 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:09:59:59 +0000] "POST /api/roles/create HTTP/1.1" 201 60 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:10:01:14 +0000] "POST /api/catelogs/create HTTP/1.1" 201 63 "-" "PostmanRuntime/7.40.0"
+::1 - - [20/Jul/2024:10:02:47 +0000] "POST /api/category/create HTTP/1.1" 201 61 "-" "PostmanRuntime/7.40.0"

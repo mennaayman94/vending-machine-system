@@ -10,3 +10,18 @@ export const getRoleById=async(id:string)=>{
       throw error;
     }
   }
+  export const createRole = async ({name }:{name:string}) => {
+    console.log("------repository:createRole---------")
+  
+    try {
+      const newRole = await prisma.role.create({
+        data: {
+        name
+        },
+      });
+      return newRole;
+    } catch (error) {
+      console.error("Error creating role:", error);
+      throw error;
+    }
+  };
