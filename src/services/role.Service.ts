@@ -5,7 +5,7 @@ export const findRoleById= async (id:string):Promise<Role>=>{
     console.log("------service:findRoleById---------")
 
     try {
-        return await getRoleById(id);
+        return await getRoleById(id) as Role;
         } catch (err) {
         throw err
         }

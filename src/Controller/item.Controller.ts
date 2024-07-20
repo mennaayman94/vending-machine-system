@@ -53,6 +53,9 @@ export const findItemController = async (req: Request|any, res: Response) => {
     const { id } = req.params;
 
     let item = await findItemService(id);
+    if(!item){
+      return res.status(404).json({message:"item not found"})
+    }
 
     res.status(201).json({ ...item });
   } catch (error) {

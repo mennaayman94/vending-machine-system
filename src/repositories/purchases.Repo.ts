@@ -35,7 +35,7 @@ export const checkInventoryAndUpdate = async (
     const paymentId=uuidv4(); 
     const currentDate= new Date()
     currentDate.setUTCHours(0, 0, 0, 0)
-    const transaction = await prisma.$transaction(async (tx: PrismaClient) => {
+    const transaction = await prisma.$transaction(async (tx: any) => {
       const transactionsItems = await tx.item.findMany({
         where: {
           id: {

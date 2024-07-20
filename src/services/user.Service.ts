@@ -29,7 +29,7 @@ export const findUserById = async (id: string): Promise<UserInput> => {
     console.log("------service:findUserById---------")
 
   try {
-    return await getUserById(id);
+    return await getUserById(id) as UserInput;
   } catch (err) {
     throw err;
   }

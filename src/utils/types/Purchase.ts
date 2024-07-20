@@ -1,5 +1,5 @@
 export interface Purchase{
-    itemId:    String 
+    itemId:    string
     totalCost:number
     quantity: number
     paymentId: string
