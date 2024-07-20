@@ -20,7 +20,7 @@ This is an application for vending machine system using nodejs, prisma and redis
 This application is structured using Repository pattern
 
 ## Prerequisites
-
+Install prisma globally `npm i prisma -g`
 Once you clone the project, run the following commands
 
 ## Installation
